@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a new dive</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <form action="/dives/<%= dive._id %>?_method=PUT" method="POST">
+      <div>
+        <label for="name">Name:</label>
+        <input type="string" id="name" name="name" value="<%= dive.name %>" />
+      </div>
+      <div>
+        <label for="depth">Depth:</label>
+        <input type="number" id="depth" name="depth" value="<%= dive.depth %>" />
+      </div>
+      <label for="time">Total time underwater</label>
+      <input type="time" id="time" name="time" value="<%= dive.time %>"/>
+      <div>
+        <label for="weight">Weights used:</label>
+        <input type="number" id="weight" name="weight" value="<%= dive.weight %>" />
+      </div>
+      <div>
+        <label for="description">Enter description</label>
+        <input type="string" id="description" name="description" value="<%= dive.description %>" />
+      </div>
+      <div>
+        <label for="image">Upload a picture</label>
+        <input type="string" id="image" name="image" value="<%= dive.image %>"/>
+        <img src="<%= dive.image %>">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+</html>

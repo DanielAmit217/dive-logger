@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <% dives.forEach(dive => { %>
+    <h1><a href="/dives/<%= dive.diver._id %>"><%= dive.diver.username %></a></h1> 
+    <ul>
+      <% if(dive.depth) { %>
+        <li><%= dive.depth %></li>
+      <% } %>
+       <% if(dive.time) { %>
+        <li><%= dive.time %></li>
+      <% } %>
+       <% if(dive.weight) { %>
+        <li><%= dive.weight %></li>
+      <% } %>
+       <% if(dive.description) { %>
+        <li><%= dive.description %></li>
+      <% } %>
+      <li><%= dive.name %></li>
+    </ul>
+    <% }); %>
+  </body>
+</html>
