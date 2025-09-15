@@ -1,12 +1,35 @@
-<nav>
+<nav class="navbar" id="main-navbar">
   <% if(user) { %>
-  <a href="/dives">Your dives</a>
-  <a href="/dives/new">upload a new dive</a>
-  <a href="/auth/sign-out">Sign Out</a>
-  <a href="/dives/all">All dives</a>
+    <a href="/dives" class="nav-link">Your profile</a>
+    <a href="/dives/new" class="nav-link">Upload a new dive</a>
+    <a href="/auth/sign-out" class="nav-link">Sign Out</a>
+    <a href="/dives/all" class="nav-link">Dives gallery</a>
   <% } else { %>
-  <a href="/auth/sign-in">Sign In</a>
-  <a href="/auth/sign-up">Sign Up</a>
-  
+    <a href="/auth/sign-in" class="nav-link">Sign In</a>
+    <a href="/auth/sign-up" class="nav-link">Sign Up</a>
   <% } %>
+  <div class="landing-image">
+    <div>
+      <a id="landing-link" href="/">
+        <img id="navbar-image" src="/resources/Dive-Logger-Logo-Text.png">
+      </a>
+    </div>
+  </div>
 </nav>
+
+<script>
+  let lastScrollY = window.scrollY;
+  const navbar = document.getElementById('main-navbar');
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY) {
+      navbar.classList.add('hidden');
+    } else {
+      navbar.classList.remove('hidden');
+    }
+
+    lastScrollY = currentScrollY;
+  });
+</script>

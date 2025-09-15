@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Home Page</title>
+    <link rel="icon" href="/resources/dive-logger.png" type="image/png" />
+  </head>
+  <body class="index-body">
     <%- include('./partials/_navbar.ejs') %>
-  <% if (user) { %>
-    <h1>Welcome, <%= user.username %>! you can upload you dives here</h1>
-  <% } else { %>
-    <h1>Welcome guest, sign in or sign up to upload a dive</h1>
-  <% } %>
-</body>
+    <main class="index-main">
+      <% if (user) { %>
+      <h1 class="index-title">
+        Welcome, <%= user.username %>! You can upload your dives here.
+      </h1>
+      <% } else { %>
+      <h1 class="index-title">
+        Welcome guest! At dive-logger you can upload and track your dives
+      </h1>
+      <% } %>
+      <h2>You can also see other user's dives and interact with them</h2>
+      <h2>Herer are some examples:</h2>
+    </main>
+    <section class="landing-dives-container" id="landing-all-dives">
+      <div class="landing-gallery">
+        <% dives.forEach((dive, index) => { %> <% if (index < 10) { %>
+        <article class="dive-card" data-dive-id="<%= dive._id %>">
+          <header class="dive-card-header">
+            <h2 class="dive-diver">
+              <a href="/dives/users/<%= dive.diver._id %>" class="dive-diver-link">
+                <%= dive.diver.username %>
+              </a>
+            </h2>
+          </header>
+          <ul class="dive-card-details">
+            <% if(dive.depth) { %>
+            <li><strong>Depth:</strong> <%= dive.depth %> m</li>
+            <% } %> <% if(dive.time) { %>
+            <li><strong>Time:</strong> <%= dive.time %></li>
+            <% } %> <% if(dive.weight) { %>
+            <li><strong>Weight:</strong> <%= dive.weight %> kg</li>
+            <% } %> <% if(dive.description) { %>
+            <li><strong>Description:</strong> <%= dive.description %></li>
+            <% } %>
+            <li><strong>Dive Name:</strong> <%= dive.name %></li>
+          </ul>
+        </article>
+        <% } %> <% }); %>
+      </div>
+    </section>
+  </body>
 </html>

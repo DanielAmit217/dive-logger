@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create a new dive</title>
-  </head>
-  <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <form action="/dives/<%= dive._id %>?_method=PUT" method="POST">
-      <div>
-        <label for="name">Name:</label>
-        <input type="string" id="name" name="name" value="<%= dive.name %>" />
-      </div>
-      <div>
-        <label for="depth">Depth:</label>
-        <input type="number" id="depth" name="depth" value="<%= dive.depth %>" />
-      </div>
-      <label for="time">Total time underwater</label>
-      <input type="time" id="time" name="time" value="<%= dive.time %>"/>
-      <div>
-        <label for="weight">Weights used:</label>
-        <input type="number" id="weight" name="weight" value="<%= dive.weight %>" />
-      </div>
-      <div>
-        <label for="description">Enter description</label>
-        <input type="string" id="description" name="description" value="<%= dive.description %>" />
-      </div>
-      <div>
-        <label for="image">Upload a picture</label>
-        <input type="string" id="image" name="image" value="<%= dive.image %>"/>
-        <img src="<%= dive.image %>">
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Edit Dives</title>
+  <link rel="icon" href="/resources/dive-logger.png" type="image/png">
+</head>
+<body class="dives-body">
+  <%- include('../partials/_navbar.ejs') %>
+  <main class="dives-main">
+    <section class="dives-container" id="edit-dives">
+      <% dives.forEach(dive => { %>
+        <article class="dive-card" data-dive-id="<%= dive._id %>">
+          <header class="dive-card-header">
+            <h2 class="dive-diver">
+              <a href="/dives/users/<%= dive.diver._id %>" class="dive-diver-link">
+                <%= dive.diver.username %>
+              </a>
+            </h2>
+          </header>
+          <ul class="dive-card-details">
+            <% if(dive.depth) { %>
+              <li><strong>Depth:</strong> <%= dive.depth %> m</li>
+            <% } %>
+            <% if(dive.time) { %>
+              <li><strong>Time:</strong> <%= dive.time %></li>
+            <% } %>
+            <% if(dive.weight) { %>
+              <li><strong>Weight:</strong> <%= dive.weight %> kg</li>
+            <% } %>
+            <% if(dive.description) { %>
+              <li><strong>Description:</strong> <%= dive.description %></li>
+            <% } %>
+            <li><strong>Dive Name:</strong> <%= dive.name %></li>
+          </ul>
+          <div class="dive-card-actions">
+            <a href="/dives/<%= dive._id %>/edit" class="btn btn-secondary">Edit This Dive</a>
+          </div>
+        </article>
+      <% }); %>
+    </section>
+  </main>
+</body>
 </html>

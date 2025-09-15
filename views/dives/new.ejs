@@ -3,34 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>Create a new dive</title>
+    <link rel="icon" href="/resources/dive-logger.png" type="image/png" />
   </head>
-  <body>
+  <body class="dives-body">
     <%- include('../partials/_navbar.ejs') %>
-    <form action="/dives" method="POST">
-      <div>
-        <label for="name">Name:</label>
-        <input type="string" id="name" name="name" />
-      </div>
-      <div>
-        <label for="depth">Depth:</label>
-        <input type="number" id="depth" name="depth" />
-      </div>
-      <label for="time">Total time underwater</label>
-      <input type="time" id="time" name="time" value="00:00"/>
-      <div>
-        <label for="weight">Weights used:</label>
-        <input type="number" id="weight" name="weight" />
-      </div>
-      <div>
-        <label for="description">Enter description</label>
-        <input type="string" id="description" name="description" />
-      </div>
-      <div>
-        <label for="image">Upload a image</label>
-        <input type="string" id="image" name="image" />
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <main class="dives-main">
+      <form action="/dives" method="POST" class="dive-form" id="new-dive-form">
+        <div class="form-group">
+          <label for="name" class="form-label">Name this dive:</label>
+          <input type="text" id="name" name="name" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="location" class="form-label">location:</label>
+          <input type="text" id="location" name="location" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="depth" class="form-label">Depth:</label>
+          <input type="number" id="depth" name="depth" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="time" class="form-label">Total time underwater</label>
+          <input type="time" id="time" name="time" value="00:00" class="form-input"/>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" name="weights"/>Weights?</label>
+          <div id="weight-box" class="hide">
+            <label for="weight" class="form-label">Weights used:</label>
+            <input type="number" id="weight" name="weight" class="form-input" value="0" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" id="description" name="description" class="form-input"/>
+        </div>
+        <div class="form-group">
+          <label for="image" class="form-label">Upload an image</label>
+          <input type="text" id="image" name="image" class="form-input" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </main>
+
+    <script>
+      const checkInputEl = document.querySelector('input[name="weights"]')
+      const weightBoxEl = document.querySelector("#weight-box")
+
+      checkInputEl.addEventListener("click", (e) => {
+        weightBoxEl.classList.toggle("hide")
+      })
+    </script>
   </body>
 </html>

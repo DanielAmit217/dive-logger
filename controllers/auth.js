@@ -30,6 +30,7 @@ router.post("/sign-up", async (req, res) => {
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     req.body.password = hashedPassword;
+    req.body.gear = [];
 
     const newUser = await User.create(req.body);
 
@@ -38,7 +39,9 @@ router.post("/sign-up", async (req, res) => {
       _id: newUser._id,
     };
 
-    res.redirect("/dives");
+    req.session.save(() => {
+      res.redirect("/dives");
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");
@@ -68,7 +71,9 @@ router.post("/sign-in", async (req, res) => {
       _id: userInDatabase._id,
     };
 
-    res.redirect("/");
+    req.session.save(() => {
+      res.redirect("/dives");
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");

@@ -3,27 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>All Dives</title>
+    <link rel="icon" href="/resources/dive-logger.png" type="image/png" />
   </head>
-  <body>
+  <body class="dives-body">
     <%- include('../partials/_navbar.ejs') %>
-    <% dives.forEach(dive => { %>
-    <h1><a href="/dives/<%= dive.diver._id %>"><%= dive.diver.username %></a></h1> 
-    <ul>
-      <% if(dive.depth) { %>
-        <li><%= dive.depth %></li>
-      <% } %>
-       <% if(dive.time) { %>
-        <li><%= dive.time %></li>
-      <% } %>
-       <% if(dive.weight) { %>
-        <li><%= dive.weight %></li>
-      <% } %>
-       <% if(dive.description) { %>
-        <li><%= dive.description %></li>
-      <% } %>
-      <li><%= dive.name %></li>
-    </ul>
-    <% }); %>
+    <main class="dives-main">
+      <div class="browse-header">
+        <h1>Browse other uses's dives!</h1>
+        <h2>Click on someone's profile to see all their dives!</h2>
+      </div>
+      <section class="dives-container" id="all-dives">
+        <% dives.forEach(dive => { %>
+        <article class="dive-card" data-dive_id="<%= dive._id %>">
+          <header class="dive-card-header">
+            <h2 class="dive-diver">
+              <a href="/dives/users/<%= dive.diver._id %>" class="dive-diver-link">
+                <%= dive.diver.username%>
+              </a>
+            </h2>
+          </header>
+          <ul class="dive-card-details">
+            <% if(dive.depth) { %>
+            <li><strong>Depth:</strong> <%= dive.depth %> m</li>
+            <% } %> <% if(dive.time) { %>
+            <li><strong>Time:</strong> <%= dive.time %></li>
+            <% } %> <% if(dive.weight) { %>
+            <li><strong>Weight:</strong> <%= dive.weight %> kg</li>
+            <% } %> <% if(dive.description) { %>
+            <li><strong>Description:</strong> <%= dive.description %></li>
+            <% } %>
+            <li><strong>Dive Name:</strong> <%= dive.name %></li>
+          </ul>
+        </article>
+        <% }); %>
+      </section>
+
+    </main>
+    <script>
+      const cards = document.querySelectorAll('.dive-card')
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          window.location.href = `/dives/${e.currentTarget.dataset.dive_id}`
+        })
+      })
+    </script>
   </body>
 </html>

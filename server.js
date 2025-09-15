@@ -8,12 +8,20 @@ const morgan = require("morgan");
 const session = require("express-session");
 
 const isSignedIn = require("./middleware/is-signed-in.js");
-const passUserToView = require("./middleware/pass-user-to-view.js")
+const passUserToView = require("./middleware/pass-user-to-view.js");
+const MongoStore = require("connect-mongo");
 
 const authController = require("./controllers/auth.js");
-const diveControllers = require("./controllers/dive.js")
+const diveControllers = require("./controllers/dive.js");
 
 const port = process.env.PORT ? process.env.PORT : "3000";
+
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+const Dive = require("./models/dive.js");
+
+const path = require("path");
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -25,26 +33,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+    }),
   })
 );
 
 app.use(passUserToView);
 
-app.get("/", (req, res) => {
-  res.render("landing.ejs");
+app.get("/", async (req, res) => {
+  const dives = await Dive.find({}).populate("diver");
+  res.render("landing.ejs", { dives });
 });
 
 app.use("/auth", authController);
 
 app.use(isSignedIn);
 
-app.use("/dives", diveControllers)
-
+app.use("/dives", diveControllers);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

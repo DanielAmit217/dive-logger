@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1><%= dive.name %></h1>
-    <div>
-      <li>Depth: <%= dive.depth %></li>
-      <li>Time: <%= dive.time %></li>
-      <li>Weight?: <%= dive.weight %></li>
-      <li>Description: <%= dive.description %></li>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Dive Details</title>
+  <link rel="icon" href="/resources/dive-logger.png" type="image/png">
+</head>
+<body class="dives-body">
+  <%- include('../partials/_navbar.ejs') %>
+  <main class="dives-main">
+    <h1 class="dive-title"><%= dive.name %></h1>
+    <section class="dive-details">
+      <ul>
+        <li>Location: <%= dive.location %></li>
+        <li>Depth: <%= dive.depth %></li>
+        <li>Time: <%= dive.time %></li>
+        <% if (dive.weight) { %>
+        <li>Weight: <%= dive.weight %> Lbs</li>
+        <% } else { %>
+          <li>No weights</li>
+          <% } %>
+        <li>Description: <%= dive.description %></li>
+      </ul>
+    </section>
     <% if (String(dive.diver) === String(user._id)) { %>
-    <a href="/dives/<%= dive._id %>/edit"><button>Edit</button></a>
-    <form action="/dives/<%= dive._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete this dive</button>
-    </form>
+      <a href="/dives/<%= dive._id %>/edit" class="btn btn-secondary">Edit</a>
+      <form action="/dives/<%= dive._id %>?_method=DELETE" method="POST" class="delete-form">
+        <button type="submit" class="btn btn-danger">Delete this dive</button>
+      </form>
     <% } %>
-  </body>
+  </main>
+</body>
 </html>
-

@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your dives</title>
-  </head>
-  <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>Your dives</h1>
-    <% dives.forEach(dive => { %>
-    <div>
-      <h1><a href="/dives/<%= dive._id %>"> <%= dive.name %></a></h1>
-    </div>
-    <ul>
-      <li>Description: <%= dive.description %></li>
-    </ul>
-    <% }); %>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Your Dives</title>
+  <link rel="icon" href="/resources/dive-logger.png" type="image/png">
+</head>
+<body class="dives-body">
+  <%- include('../partials/_navbar.ejs') %>
+  <main class="dives-main">
+    <h1 class="dive-title">Your Dives</h1>
+    <section class="dives-container" id="user-dives">
+      <% dives.forEach(dive => { %>
+        <article class="dive-card" data-dive-id="<%= dive._id %>">
+          <header class="dive-card-header">
+            <h2 class="dive-name">
+              <a href="/dives/<%= dive._id %>" class="dive-link">
+                <%= dive.name %>
+              </a>
+            </h2>
+          </header>
+          <ul class="dive-card-details">
+            <li><strong>Location:</strong> <%= dive.location %></li>
+            <li><strong>Description:</strong> <%= dive.description %></li>
+          </ul>
+        </article>
+      <% }); %>
+    </section>
+  </main>
+</body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= currentUser.username %>'s Dives</title>
+    <link rel="icon" href="/resources/dive-logger.png" type="image/png" />
+  </head>
+  <body class="dives-body">
+    <%- include('../partials/_navbar.ejs') %>
+    <main class="dives-main">
+      <h1 class="dive-title"><%= currentUser.username %>'s Dives</h1>
+      <section class="dives-container" id="user-profile-dives">
+        <% userDives.forEach(dive => { %>
+        <article class="dive-card" data-dive-id="<%= dive._id %>">
+          <header class="dive-card-header">
+            <h2 class="dive-name">
+              <a href="/dives/<%= dive._id %>" class="dive-link">
+                <%= dive.name %>
+              </a>
+            </h2>
+          </header>
+          <ul class="dive-card-details">
+            <li><strong>Description:</strong> <%= dive.description %></li>
+          </ul>
+        </article>
+        <% }); %>
+      </section>
+    </main>
+  </body>
+</html>
