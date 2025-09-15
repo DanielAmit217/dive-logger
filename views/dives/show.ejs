@@ -12,6 +12,10 @@
   <main class="dives-main">
     <h1 class="dive-title"><%= dive.name %></h1>
     <section class="dive-details">
+      <% if (String(dive.diver) === String(user._id)) { %>
+        <% } else { %>
+        <h2> <%= dive.diver.username %></h2>
+        <% } %>
       <ul>
         <li>Location: <%= dive.location %></li>
         <li>Depth: <%= dive.depth %></li>

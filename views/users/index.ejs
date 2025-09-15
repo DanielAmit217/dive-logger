@@ -13,7 +13,7 @@
       <h1 class="dive-title"><%= currentUser.username %>'s Dives</h1>
       <section class="dives-container" id="user-profile-dives">
         <% userDives.forEach(dive => { %>
-        <article class="dive-card" data-dive-id="<%= dive._id %>">
+        <article class="dive-card" data-dive_id="<%= dive._id %>">
           <header class="dive-card-header">
             <h2 class="dive-name">
               <a href="/dives/<%= dive._id %>" class="dive-link">
@@ -28,5 +28,13 @@
         <% }); %>
       </section>
     </main>
+    <script>
+      const cards = document.querySelectorAll('.dive-card')
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          window.location.href = `/dives/${e.currentTarget.dataset.dive_id}`
+        })
+      })
+    </script>
   </body>
 </html>

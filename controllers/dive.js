@@ -51,6 +51,19 @@ router.post("/", async (req, res) => {
   res.redirect("/dives");
 });
 
+router.get("/:diveId/edit", async (req, res) => {
+  try {
+    const dive = await Dive.findById(req.params.diveId).populate({
+      path: "diver",
+      select: "-password",
+    });
+
+    res.render("dives/edit.ejs", { dive });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 router.get("/:diveId", async (req, res) => {
   const dive = await Dive.findById(req.params.diveId);
   res.render("dives/show.ejs", { dive });
@@ -60,15 +73,6 @@ router.delete("/:diveId", async (req, res) => {
   try {
     await Dive.findByIdAndDelete(req.params.diveId);
     res.redirect("/dives");
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-router.get("/:diveId/edit", async (req, res) => {
-  try {
-    const dive = await Dive.findById(req.params.diveId);
-    res.render("dives/edit.ejs", { dive });
   } catch (error) {
     console.error(error);
   }

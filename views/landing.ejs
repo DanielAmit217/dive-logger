@@ -20,12 +20,12 @@
       </h1>
       <% } %>
       <h2>You can also see other user's dives and interact with them</h2>
-      <h2>Herer are some examples:</h2>
+      <h2>Here are some examples:</h2>
     </main>
     <section class="landing-dives-container" id="landing-all-dives">
       <div class="landing-gallery">
         <% dives.forEach((dive, index) => { %> <% if (index < 10) { %>
-        <article class="dive-card" data-dive-id="<%= dive._id %>">
+        <article class="dive-card" data-dive_id="<%= dive._id %>">
           <header class="dive-card-header">
             <h2 class="dive-diver">
               <a href="/dives/users/<%= dive.diver._id %>" class="dive-diver-link">
@@ -49,5 +49,13 @@
         <% } %> <% }); %>
       </div>
     </section>
+    <script>
+      const cards = document.querySelectorAll('.dive-card')
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          window.location.href = `/dives/${e.currentTarget.dataset.dive_id}`
+        })
+      })
+    </script>
   </body>
 </html>
