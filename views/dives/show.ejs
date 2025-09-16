@@ -34,8 +34,7 @@
         <% } %>
         <li><strong>Description:</strong> <%= dive.description %></li>
       </ul>
-
-      <% if (String(dive.diver) === String(user._id)) { %>
+      <% if (String(dive.diver._id) === String(user._id)) { %>
         <a href="/dives/<%= dive._id %>/edit" class="btn btn-secondary">Edit</a>
         <form action="/dives/<%= dive._id %>?_method=DELETE" method="POST" class="delete-form">
           <button type="submit" class="btn btn-danger">Delete this dive</button>

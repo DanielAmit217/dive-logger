@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const gearSchema = new mongoose.Schema({
-  // inject fields
-})
+const gearSchema = new mongoose.Schema({});
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -13,9 +11,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  gear: [gearSchema]
+  gear: [gearSchema],
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
