@@ -9,31 +9,39 @@
 </head>
 <body class="dives-body">
   <%- include('../partials/_navbar.ejs') %>
+
   <main class="dives-main">
-    <h1 class="dive-title"><%= dive.name %></h1>
-    <section class="dive-details">
-      <% if (String(dive.diver) === String(user._id)) { %>
-        <% } else { %>
-        <h2> <%= dive.diver.username %></h2>
+    <div class="dive-card">
+      <div class="dive-card-header">
+        <h1 class="dive-title"><%= dive.name %></h1>
+        <% if (String(dive.diver) !== String(user._id)) { %>
+          <h2>  
+            <a class="dive-diver-link" href="/dives/users/<%= dive.diver._id %>">
+              <%= dive.diver.username %>
+            </a>
+          </h2>
         <% } %>
-      <ul>
-        <li>Location: <%= dive.location %></li>
-        <li>Depth: <%= dive.depth %></li>
-        <li>Time: <%= dive.time %></li>
+      </div>
+
+      <ul class="dive-card-details">
+        <li><strong>Location:</strong> <%= dive.location %></li>
+        <li><strong>Depth:</strong> <%= dive.depth %></li>
+        <li><strong>Time:</strong> <%= dive.time %></li>
         <% if (dive.weight) { %>
-        <li>Weight: <%= dive.weight %> Lbs</li>
+          <li><strong>Weight:</strong> <%= dive.weight %> lbs</li>
         <% } else { %>
           <li>No weights</li>
-          <% } %>
-        <li>Description: <%= dive.description %></li>
+        <% } %>
+        <li><strong>Description:</strong> <%= dive.description %></li>
       </ul>
-    </section>
-    <% if (String(dive.diver) === String(user._id)) { %>
-      <a href="/dives/<%= dive._id %>/edit" class="btn btn-secondary">Edit</a>
-      <form action="/dives/<%= dive._id %>?_method=DELETE" method="POST" class="delete-form">
-        <button type="submit" class="btn btn-danger">Delete this dive</button>
-      </form>
-    <% } %>
+
+      <% if (String(dive.diver) === String(user._id)) { %>
+        <a href="/dives/<%= dive._id %>/edit" class="btn btn-secondary">Edit</a>
+        <form action="/dives/<%= dive._id %>?_method=DELETE" method="POST" class="delete-form">
+          <button type="submit" class="btn btn-danger">Delete this dive</button>
+        </form>
+      <% } %>
+    </div>
   </main>
 </body>
 </html>

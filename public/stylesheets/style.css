@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
-/* --- Reset & Base --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,16 +9,23 @@
 body {
   font-family: "Poppins", "Inter", Arial, sans-serif;
   min-height: 100vh;
-  /* background: #f5f8fa; */
   color: #333;
   line-height: 1.6;
   padding: 0.5rem;
+  padding-top: calc(var(--navbar-height) + 1rem);
   padding-top: 8%;
   background-image: url("/resources/diving-background.jpg");
   background-size: cover;
 }
 
-/* --- Navbar --- */
+:root {
+  --navbar-height: 70px;
+}
+
+body.landing {
+  padding-top: calc(var(--navbar-height) + 2rem);
+}
+
 .navbar {
   background: #0077b6;
   color: white;
@@ -67,6 +73,11 @@ body {
   opacity: 0.85;
 }
 
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
 .nav-link {
   color: white;
   text-decoration: none;
@@ -78,7 +89,6 @@ body {
   color: #90e0ef;
 }
 
-/* --- Auth Pages --- */
 .auth-body {
   background: #9ac2ef;
 }
@@ -120,7 +130,6 @@ body {
   outline: none;
 }
 
-/* --- Buttons --- */
 .btn {
   display: inline-block;
   padding: 0.7rem 1.2rem;
@@ -153,7 +162,6 @@ body {
   background: #c62828;
 }
 
-/* --- Dive Cards / Main Dive List --- */
 .dives-body {
   background-color: #9ac2ef;
 }
@@ -213,7 +221,7 @@ body {
 }
 
 .dive-title {
-  color: #065487;
+  color: #333;
   margin-bottom: 2rem;
 }
 .dive-details ul {
@@ -223,9 +231,6 @@ body {
 #landing-all-dives {
   display: flex;
   justify-content: center;
-  /* flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap; */
 }
 
 .landing-gallery {
@@ -239,7 +244,6 @@ body {
   margin: 3%;
 }
 
-/* --- Dive Form --- */
 .dive-form {
   padding: 2rem 2.2rem;
   background: #fff;
@@ -258,22 +262,77 @@ body {
   display: none;
 }
 
-/* --- Responsive --- */
+.hamburger {
+  display: none;
+}
+
+/* --------------------- */
 @media (max-width: 600px) {
   body {
     padding: 0.5rem;
+    padding-top: 4rem;
+    padding-top: calc(var(--navbar-height) + 0.5rem);
   }
+
+  body.menu-open {
+    padding-top: calc(var(--navbar-height) + 3rem);
+  }
+
+  body.landing {
+    padding-top: calc(var(--navbar-height) + 3rem);
+  }
+
+  :root {
+    --navbar-height: 90px;
+  }
+
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    max-height: none;
   }
+
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+
+  .landing-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #0077b6;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
   .auth-main,
   .dive-form {
     padding: 1rem;
   }
+
   .dives-main {
     padding: 0 0.2rem;
   }
+
   .dives-container {
     padding: 0.3rem;
     gap: 1rem;

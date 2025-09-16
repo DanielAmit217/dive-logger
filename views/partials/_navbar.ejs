@@ -1,4 +1,7 @@
 <nav class="navbar" id="main-navbar">
+  <button class="hamburger" aria-label="Menu">&#9776;</button>
+  
+  <div class="nav-links">
   <% if(user) { %>
     <a href="/dives" class="nav-link">Your profile</a>
     <a href="/dives/new" class="nav-link">Upload a new dive</a>
@@ -8,10 +11,12 @@
     <a href="/auth/sign-in" class="nav-link">Sign In</a>
     <a href="/auth/sign-up" class="nav-link">Sign Up</a>
   <% } %>
+  </div> 
+
   <div class="landing-image">
     <div>
       <a id="landing-link" href="/">
-        <img id="navbar-image" src="/resources/Dive-Logger-Logo-Text.png">
+        <img id="navbar-image" src="/resources/Dive-Logger-Logo-Text.png" alt="Dive Logger">
       </a>
     </div>
   </div>
@@ -20,6 +25,8 @@
 <script>
   let lastScrollY = window.scrollY;
   const navbar = document.getElementById('main-navbar');
+  const hamburger = document.querySelector('.hamburger')
+  const navLinks = document.querySelector('.nav-links')
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
@@ -32,4 +39,10 @@
 
     lastScrollY = currentScrollY;
   });
+
+  
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    document.body.classList.toggle('menu-open', navLinks.classList.contains('open'));
+  })
 </script>

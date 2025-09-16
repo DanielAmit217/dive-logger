@@ -11,7 +11,7 @@
     <%- include('../partials/_navbar.ejs') %>
     <main class="dives-main">
       <div class="browse-header">
-        <h1>Browse other uses's dives!</h1>
+        <h1>Browse other users' dives!</h1>
         <h2>Click on someone's profile to see all their dives!</h2>
       </div>
       <section class="dives-container" id="all-dives">
@@ -25,7 +25,9 @@
             </h2>
           </header>
           <ul class="dive-card-details">
-            <% if(dive.depth) { %>
+            <% if(dive.location) { %>
+            <li><strong>Location:</strong> <%= dive.location %> m</li>
+            <% } %> <% if(dive.time) { %>
             <li><strong>Depth:</strong> <%= dive.depth %> m</li>
             <% } %> <% if(dive.time) { %>
             <li><strong>Time:</strong> <%= dive.time %></li>

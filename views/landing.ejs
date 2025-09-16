@@ -7,7 +7,7 @@
     <title>Home Page</title>
     <link rel="icon" href="/resources/dive-logger.png" type="image/png" />
   </head>
-  <body class="index-body">
+  <body class="index-body landing">
     <%- include('./partials/_navbar.ejs') %>
     <main class="index-main">
       <% if (user) { %>
@@ -19,7 +19,7 @@
         Welcome guest! At dive-logger you can upload and track your dives
       </h1>
       <% } %>
-      <h2>You can also see other user's dives and interact with them</h2>
+      <h2>You can also see other divers activities and interact with them</h2>
       <h2>Here are some examples:</h2>
     </main>
     <section class="landing-dives-container" id="landing-all-dives">
@@ -35,6 +35,8 @@
           </header>
           <ul class="dive-card-details">
             <% if(dive.depth) { %>
+            <li><strong>Location:</strong> <%= dive.location %> m</li>
+            <% } %> <% if(dive.time) { %>
             <li><strong>Depth:</strong> <%= dive.depth %> m</li>
             <% } %> <% if(dive.time) { %>
             <li><strong>Time:</strong> <%= dive.time %></li>

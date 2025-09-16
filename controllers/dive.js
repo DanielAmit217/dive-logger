@@ -1,23 +1,9 @@
 const express = require("express");
 const router = express.Router();
-// import Dive model
 const Dive = require("../models/dive");
 
 router.get("/", async (req, res) => {
   const divesData = await Dive.find({ diver: req.session.user._id });
-  //   if (!dive.time) return acc;
-
-  //   const parts = dive.time.split(":"); // Splits the string into ["00", "25"]
-  //   const hours = parseInt(parts[0], 10); // Converts "00" to 0
-  //   const minutes = parseInt(parts[1], 10); // Converts "25" to 25
-
-  //   const totalMinutes = hours * 60 + minutes;
-
-  //   console.log("total Min: ", totalMinutes);
-  //   console.log("acc: ", acc);
-
-  //   return acc + totalMinutes;
-  // }, 0);
 
   res.render("dives/index.ejs", { dives: divesData });
 });
@@ -65,8 +51,16 @@ router.get("/:diveId/edit", async (req, res) => {
 });
 
 router.get("/:diveId", async (req, res) => {
-  const dive = await Dive.findById(req.params.diveId);
-  res.render("dives/show.ejs", { dive });
+  try {
+    const dive = await Dive.findById(req.params.diveId).populate({
+      path: "diver",
+      select: "-password",
+    });
+
+    res.render("dives/show.ejs", { dive });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.delete("/:diveId", async (req, res) => {
