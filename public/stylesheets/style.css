@@ -180,8 +180,10 @@ body.landing {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  padding: 1rem;
+  padding: 1.5rem 0.2rem;
   justify-items: center;
+  background-color: hsla(196, 68%, 57%, 0.35);
+  border-radius: 20px;
 }
 .dive-card {
   width: 45%;
@@ -239,7 +241,7 @@ body.landing {
   flex-wrap: wrap;
   padding: 15px;
   justify-content: center;
-  background-color: lightblue;
+  background-color: hsla(196, 68%, 57%, 0.35);
   border-radius: 20px;
   margin: 3%;
 }
