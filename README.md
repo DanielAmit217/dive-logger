@@ -46,7 +46,7 @@ I did not use and external technologies on this project, except for the basic la
 
 ## next steps
 
-My stretch goals are listed out on my _Trello_, I only reached onestretch goal that I set for myself at the start of the project so I am definitly going to work more to reach at least another one.
+My stretch goals are listed out on my _Trello_, I only reached one stretch goal that I set for myself at the start of the project so I am definitly going to work more to reach at least another one.
 
 - See overall time underwater
 - Have a gear model that you can upload gear you have to your profile, and then list out what gear you used on what dives to keep track how many dives you have with each piece of gear
