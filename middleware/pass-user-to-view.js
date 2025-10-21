@@ -5,15 +5,3 @@ const passUserToView = (req, res, next) => {
 
 module.exports = passUserToView
 
-
-// res = {
-//     send: xxx,
-//     render: xxx,
-//     locals: {
-//         dive: { name: asdf, depth},
-//         user: {
-//             _id: xxx,
-//             username: xxx
-//         }
-//     }
-// }

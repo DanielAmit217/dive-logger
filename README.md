@@ -18,7 +18,7 @@ I did not use and external technologies on this project, except for the basic la
 
 ### Technologies used
 
-- MongoDB – NoSQL database for storing your application’s data.
+- MongoDB – NoSQL database for storing the application’s data.
 
 - Mongoose – ODM (Object Data Modeling) library that provides a structured way to interact with MongoDB using schemas and models.
 

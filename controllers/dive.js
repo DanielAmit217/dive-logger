@@ -43,8 +43,11 @@ router.get("/:diveId/edit", async (req, res) => {
       path: "diver",
       select: "-password",
     });
-
-    res.render("dives/edit.ejs", { dive });
+    if (req.session.user._id === dive.diver._id) {
+      res.render("dives/edit.ejs", { dive });
+    } else {
+      res.redirect("/");
+    }
   } catch (error) {
     console.error(error);
   }
